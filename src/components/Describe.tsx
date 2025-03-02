@@ -32,10 +32,11 @@ export const Describe: React.FC<DescribeProps> = ({
   }, [idEditNote, setIsVisible, setText, textEditNote]);
 
   useEffect(() => {
-    if (isVisible && textareaRef.current) {
+    if (isVisible && textareaRef.current && idEditNote === null) {
+      console.log(textareaRef.current)
       textareaRef.current.focus(); // Устанавливаем фокус
     }
-  }, [currentId, isVisible]); // Следим за currentId и видимостью
+  }, [currentId, isVisible, idEditNote]); // Следим за currentId и видимостью
 
   const handleTextareaInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.currentTarget.value;
