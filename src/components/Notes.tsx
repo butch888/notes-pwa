@@ -1,6 +1,6 @@
 import { Describe, NotesList } from "./index"
 import { data } from '../data/data'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Data {
   id: number;
@@ -10,11 +10,23 @@ interface Data {
 
 export const Notes: React.FC = () => {
 
-  const [state, setState] = useState<Data[]>(data)
+  let myData: Data[] = data
+
+  if (localStorage.getItem('data')) {
+    const storedData = localStorage.getItem('data');
+    myData = storedData ? JSON.parse(storedData) : data;
+  
+  }
+
+  const [state, setState] = useState<Data[]>(myData)
   const [idEditNote, setIdEdittNote] = useState<number | null>(null);
   const [textEditNote, setTextEditNote] = useState<string>("")
   const [text, setText] = useState<string>(""); // Локальное состояние для textarea
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    localStorage.setItem('data', JSON.stringify(state));
+  }, [state]);
 
   const editNote = (id: number, text: string) => {
     setIdEdittNote(id);
