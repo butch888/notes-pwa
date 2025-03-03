@@ -29,6 +29,7 @@ export const Notes: React.FC = () => {
   }, [state]);
 
   const editNote = (id: number, text: string) => {
+    console.log(id)
     setIdEdittNote(id);
     setTextEditNote(text);
   };

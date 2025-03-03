@@ -33,10 +33,16 @@ export const Describe: React.FC<DescribeProps> = ({
 
   useEffect(() => {
     if (isVisible && textareaRef.current && idEditNote === null) {
-      console.log(textareaRef.current)
       textareaRef.current.focus(); // Устанавливаем фокус
     }
   }, [currentId, isVisible, idEditNote]); // Следим за currentId и видимостью
+
+  function generateId() {
+    // Используем комбинацию времени и случайного числа
+    const timestamp = Date.now();
+    const randomPart = Math.floor(Math.random() * 1000);
+    return timestamp + randomPart;
+  }
 
   const handleTextareaInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.currentTarget.value;
@@ -53,7 +59,7 @@ export const Describe: React.FC<DescribeProps> = ({
     setIdEdittNote(null);
 
     setState((prev) => {
-      const newNote = { id: prev.length + 1, desc: "New note" };
+      const newNote = { id: generateId(), desc: "New note" };
       setCurrentId(newNote.id);
       return [...prev, newNote];
     });
