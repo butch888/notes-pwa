@@ -53,6 +53,12 @@
 .main {
   padding: 20px 20px;
 }
+
+.tile {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .notelist {
   border-right: 2px solid black;
   padding-right: 20px;
@@ -79,11 +85,15 @@
   resize: none;
 }
 
+.note {
+  padding-left: 10px;
+}
+
 .describe-title {
   display: flex;
+  height: 50px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .desc-add {
@@ -94,14 +104,18 @@
   height: 20px;
   background-color: #fff;
   border: 2px solid rgb(0, 0, 0);
-  border-radius: 50%;
+  border-radius: 15%;
   cursor: pointer;
-  padding: 10px;
+  padding: 15px;
   transition: all  ease-in-out 0.3s;
 }
 
 .desc-add:hover {
-  border-radius: 15%;
+  border-radius: 50%;
+}
+
+.desc-add__visible {
+  display: none;
 }
 
 .note li {
@@ -112,12 +126,15 @@
   cursor: pointer;
 }
 
+
+
 .font-bold {
   font-weight: bold;
   background-color: #d4d4d4;
   border-radius: 5px;
 }
 
+/* Mobile screen */
 @media (max-width: 900px) {
   .notes {
     display: block;
@@ -125,8 +142,9 @@
 
   .notelist {
     border: none;
-    min-height: 30vh;
+    min-height: 10vh;
     padding: 0;
+    margin-bottom: 20px;
   }
 
   .hidden-textarea {
@@ -135,9 +153,6 @@
 
   .describe {
     padding: 0;
-  }
-
-  .note {
-    padding-left: 40px;
+    min-height: 30vh;
   }
 }

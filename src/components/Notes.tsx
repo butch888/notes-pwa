@@ -23,13 +23,14 @@ export const Notes: React.FC = () => {
   const [textEditNote, setTextEditNote] = useState<string>("")
   const [text, setText] = useState<string>(""); // Локальное состояние для textarea
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentId, setCurrentId] = useState<number | null>(null);
+
 
   useEffect(() => {
     localStorage.setItem('data', JSON.stringify(state));
   }, [state]);
 
   const editNote = (id: number, text: string) => {
-    console.log(id)
     setIdEdittNote(id);
     setTextEditNote(text);
   };
@@ -40,8 +41,11 @@ export const Notes: React.FC = () => {
                   setState={setState} 
                   editNote={editNote} 
                   idEditNote={idEditNote} 
+                  setIdEdittNote={setIdEdittNote}
                   setText={setText}
-                  setIsVisible={setIsVisible}/>
+                  setIsVisible={setIsVisible}
+                  currentId={currentId}
+                  />
       <Describe setState={setState} 
                 setIdEdittNote={setIdEdittNote}
                 idEditNote={idEditNote} 
@@ -50,6 +54,8 @@ export const Notes: React.FC = () => {
                 setText={setText}
                 isVisible={isVisible}
                 setIsVisible={setIsVisible}
+                currentId={currentId}
+                setCurrentId={setCurrentId}
                 />
     </div>
   )

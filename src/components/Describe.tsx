@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { PlusOutlined } from "@ant-design/icons";
+import { useEffect, useRef } from "react";
 
 interface Data {
   id: number;
@@ -15,12 +16,15 @@ interface DescribeProps {
   isVisible: boolean;
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setIdEdittNote: React.Dispatch<React.SetStateAction<number | null>>;
+  currentId: number | null;
+  setCurrentId: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export const Describe: React.FC<DescribeProps> = ({ 
-  setState, textEditNote, idEditNote, text, setText, isVisible, setIsVisible, setIdEdittNote 
+  setState, textEditNote, idEditNote, text, setText, isVisible, setIsVisible, setIdEdittNote, currentId, setCurrentId
 }) => {
-  const [currentId, setCurrentId] = useState<number | null>(null);
+
+  // const [currentId, setCurrentId] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null); // Ссылка на textarea
 
   useEffect(() => {
@@ -29,7 +33,7 @@ export const Describe: React.FC<DescribeProps> = ({
       setCurrentId(idEditNote);
       setText(textEditNote);
     }
-  }, [idEditNote, setIsVisible, setText, textEditNote]);
+  }, [idEditNote, setCurrentId, setIsVisible, setText, textEditNote]);
 
   useEffect(() => {
     if (isVisible && textareaRef.current && idEditNote === null) {
@@ -57,9 +61,10 @@ export const Describe: React.FC<DescribeProps> = ({
     setIsVisible(true);
     setText("");
     setIdEdittNote(null);
+    console.log(currentId)
 
     setState((prev) => {
-      const newNote = { id: generateId(), desc: "New note" };
+      const newNote = { id: generateId(), desc: "Add your new note" };
       setCurrentId(newNote.id);
       return [...prev, newNote];
     });
@@ -68,9 +73,9 @@ export const Describe: React.FC<DescribeProps> = ({
   return (
     <div className="describe">
       <div className="describe-title">
-        <p>Describe</p>
+        <p className="tile">Describe</p>
         <button className="desc-add" onClick={addNote} disabled={text || !isVisible ? false : true}>
-          +
+          <PlusOutlined />
         </button>
       </div>
 
@@ -83,6 +88,7 @@ export const Describe: React.FC<DescribeProps> = ({
             spellCheck="true"
             value={text}
             onChange={handleTextareaInput}
+            placeholder='Add your new note'
           ></textarea>
         </form>
       )}
