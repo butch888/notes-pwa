@@ -108,6 +108,10 @@
   padding: 10px;
 }
 
+.note li:hover {
+  cursor: pointer;
+}
+
 .font-bold {
   font-weight: bold;
   background-color: #d4d4d4;
@@ -122,6 +126,7 @@
   .notelist {
     border: none;
     min-height: 30vh;
+    padding: 0;
   }
 
   .hidden-textarea {

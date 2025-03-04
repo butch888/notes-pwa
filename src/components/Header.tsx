@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
     const signOut = context?.signOut;  
   return (
     <header className="header">
-      <Link to='https://github.com/butch888?tab=repositories' 
+      <Link to='https://github.com/butch888/notes-pwa' 
             target="_blank"
             className="link">
         Github
